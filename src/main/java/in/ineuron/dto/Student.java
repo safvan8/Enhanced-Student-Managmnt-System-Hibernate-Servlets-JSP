@@ -1,7 +1,15 @@
 package in.ineuron.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Student
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sid;
 	private String sname;
 	private Integer sage;
@@ -14,7 +22,7 @@ public class Student
 
 	public Student()
 	{
-		System.out.println("Student object creation.....");
+		System.out.println("Student object creation...internally by hibernate..");
 	}
 
 	// getters
