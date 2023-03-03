@@ -4,18 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import in.ineuron.util.HibernateUtil;
 import in.ineuron.dto.Student;
-import in.ineuron.util.JdbcUtil;
 
 // class to perform insert operations
 public class InsertStudent
 {
 	private static InsertStudent insertStudent = null;
-
-	private Connection connection = null;
-	private PreparedStatement preparedStatement=null;;
-
-	private String sqlInsertQuery = null;
 
 	// making class singleton
 	private InsertStudent()
@@ -33,47 +31,43 @@ public class InsertStudent
 	}
 
 	// to insert student record in to DB
-	public String save(Student student)
+	public Integer save(Student student)
 	{
 		System.out.println("InsertStudent.save()................\n");
+		int generatedSId = 0;
 
-		String queryExecutionStatus = "";
+		// creating session object by calling utility method
+		Session session = HibernateUtil.getSession();
 
-		sqlInsertQuery = "INSERT INTO schooldbo.student_tab3 (`sname`,`sage`,`saddress`)  VALUES (?,?,?)";
-
-		// getting connection and preparing statement
-		connection = JdbcUtil.getConnection();
-
-		if (connection != null)
+		boolean isOperationSuceess = false;
+		// getting transaction -> to setAutocommit(flase)
+		Transaction transaction = null;
+		try
 		{
-			int rowsAffected = 0;
+			transaction = session.beginTransaction();
 
-			try
-			{
-				preparedStatement = connection.prepareStatement(sqlInsertQuery);
+			// inserting object to DB
+			// if we use save() method then Hibernate Software will insert a record in DB
+			// and return generated primary key value,
+			generatedSId = (Integer) session.save(student);
 
-				if (preparedStatement != null)
-				{
-					// setting values to preparedStatement
-					preparedStatement.setString(1, student.getSname());
-					preparedStatement.setInt(2, student.getSage());
-					preparedStatement.setString(3, student.getSadress());
+			isOperationSuceess = true;
 
-					// executing query
-					rowsAffected = preparedStatement.executeUpdate();
-				}
-
-			} catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
-
-			if (rowsAffected == 1)
-				queryExecutionStatus = "success";
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			isOperationSuceess = false;
+		} finally
+		{
+			if (isOperationSuceess)
+				transaction.commit();
 			else
-				queryExecutionStatus = "failed";
+				transaction.rollback();
 
+			session.close();
 		}
-		return queryExecutionStatus;
+
+		// returning generated PrimaryKey
+		return generatedSId;
 	}
 }

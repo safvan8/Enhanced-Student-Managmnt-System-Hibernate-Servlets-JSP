@@ -1,4 +1,4 @@
-package in.ineuron.app_util;
+package in.ineuron.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -18,6 +18,9 @@ public class HibernateUtil
 			cfg = new Configuration();
 			cfg.configure("/in/ineuron/resources/hibernate.cfg.xml");
 			sessionFactory = cfg.buildSessionFactory();
+			
+			System.out.println("Session factory object created successfully");
+			
 		} catch (HibernateException e)
 		{
 			e.printStackTrace();
@@ -38,6 +41,7 @@ public class HibernateUtil
 	{
 		if (session != null)
 		{
+			System.out.println("Session closed successfully");
 			session.close();
 		}
 	}

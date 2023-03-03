@@ -16,7 +16,7 @@ public class StudentDaoImpl implements IStudentDao
 	
 	
 	@Override
-	public String save(Student student)
+	public Integer save(Student student)
 	{
 		System.out.println("StudentDaoImpl.save().............\n");
 		

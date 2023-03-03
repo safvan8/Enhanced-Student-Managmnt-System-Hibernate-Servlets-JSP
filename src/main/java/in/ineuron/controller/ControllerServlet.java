@@ -86,15 +86,15 @@ public class ControllerServlet extends HttpServlet
 			// passing Student object to servcie layer
 			studentService = StudentServiceFactory.getStudentService();
 
-			String status = studentService.save(student);
+			Integer generatedSId = studentService.save(student);
 
-			if (status.equals("success"))
+			if (generatedSId != 0)
 			{
 				System.out.println("record inserted successfully...");
 				rd = request.getRequestDispatcher("../success.html");
 				rd.forward(request, response);
 
-			} else if (status.equals("failed"))
+			} else if (generatedSId ==0)
 			{
 				rd = request.getRequestDispatcher("../notfound.html");
 				rd.forward(request, response);

@@ -11,7 +11,7 @@ public class StudentServiceImpl implements IStudentService
 	private IStudentDao studentDao;
 
 	@Override
-	public String save(Student student)
+	public Integer save(Student student)
 	{
 		System.out.println("StudentServiceImpl.save()............\n");
 

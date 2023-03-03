@@ -4,7 +4,7 @@ import in.ineuron.dto.Student;
 
 public interface IStudentDao
 {
-	public abstract String save(Student student); // INSERT new student record
+	public abstract Integer save(Student student); // INSERT new student record
 
 	public abstract Student findById(Integer sid); // select one student details and display to end user
 
