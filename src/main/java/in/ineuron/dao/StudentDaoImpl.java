@@ -3,7 +3,7 @@ package in.ineuron.dao;
 import in.ineuron.dao.dboperations.InsertStudent;
 import in.ineuron.dao.dboperations.SelectStudent;
 import in.ineuron.dao.dboperations.UpdateStudent;
-import in.ineuron.dto.Student;
+import in.ineuron.pojo.Student;
 
 public class StudentDaoImpl implements IStudentDao
 {

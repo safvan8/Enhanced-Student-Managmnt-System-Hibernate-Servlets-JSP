@@ -1,14 +1,13 @@
 package in.ineuron.dao.dboperations;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
+import in.ineuron.pojo.Student;
 import in.ineuron.util.HibernateUtil;
-import in.ineuron.dto.Student;
 
 // class to perform insert operations
 public class InsertStudent
@@ -36,8 +35,17 @@ public class InsertStudent
 		System.out.println("InsertStudent.save()................\n");
 		int generatedSId = 0;
 
+		Configuration configuration = new Configuration();
+		configuration.configure();
+		
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		
+		
+		
 		// creating session object by calling utility method
-		Session session = HibernateUtil.getSession();
+//		Session session = HibernateUtil.getSession();
 
 		boolean isOperationSuceess = false;
 		// getting transaction -> to setAutocommit(flase)

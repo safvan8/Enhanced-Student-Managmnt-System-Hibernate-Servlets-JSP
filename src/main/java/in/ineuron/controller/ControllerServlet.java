@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import in.ineuron.dto.Student;
 import in.ineuron.factory.StudentServiceFactory;
+import in.ineuron.pojo.Student;
 import in.ineuron.service.IStudentService;
 
 //@WebServlet(urlPatterns = "/controller/*", loadOnStartup = 1)
@@ -28,13 +28,22 @@ public class ControllerServlet extends HttpServlet
 
 	public ControllerServlet()
 	{
-		System.out.println("Servlet instantation....");
+		System.out.println("Servlet instantation..787"
+				+ "..");
 	}
 
 	@Override
 	public void init() throws ServletException
 	{
 		System.out.println("Servlet instantiation.");
+		try
+		{
+			getClass().forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

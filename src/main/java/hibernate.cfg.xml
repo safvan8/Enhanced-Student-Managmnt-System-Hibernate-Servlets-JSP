@@ -5,14 +5,17 @@
 
 <hibernate-configuration>
 	<session-factory>
-		<property name="driver_Class">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.driverClass">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/schooldbo</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">Safvan@123</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/schooldbo</property>
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
-		<property name="hbmddl2.auto">update</property>
-		<mapping class="in.ineuron.dto.Student" />
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<mapping class="in.ineuron.pojo.Student" />
+		
 	</session-factory>
 </hibernate-configuration>
+

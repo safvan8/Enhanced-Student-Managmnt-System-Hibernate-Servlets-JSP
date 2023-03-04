@@ -5,51 +5,39 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil
-{
+import java.io.File;
+
+public class HibernateUtil {
 
 	static Configuration cfg = null;
 	static SessionFactory sessionFactory = null;
 	static Session session = null;
-	static
-	{
-		try
-		{
+	static {
+		try {
 			cfg = new Configuration();
-			cfg.configure("/in/ineuron/resources/hibernate.cfg.xml");
+			cfg.configure("resources/hibernate.cfg.xml");
 			sessionFactory = cfg.buildSessionFactory();
-			
-			System.out.println("Session factory object created successfully");
-			
-		} catch (HibernateException e)
-		{
+		} catch (HibernateException e) {
 			e.printStackTrace();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static Session getSession()
-	{
-		session = sessionFactory.openSession();
-		System.out.println("session Object created successfully.......");
+	public static Session getSession() {
+		if (session == null)
+			session = sessionFactory.openSession();
 		return session;
 	}
 
-	public static void closeSession(Session session)
-	{
-		if (session != null)
-		{
-			System.out.println("Session closed successfully");
+	public static void closeSession(Session session) {
+		if (session != null) {
 			session.close();
 		}
 	}
 
-	public static void closeSessionFactory()
-	{
-		if (sessionFactory != null)
-		{
+	public static void closeSessionFactory() {
+		if (sessionFactory != null) {
 			sessionFactory.close();
 		}
 	}

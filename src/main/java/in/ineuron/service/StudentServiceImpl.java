@@ -1,9 +1,9 @@
 package in.ineuron.service;
 
 import in.ineuron.dao.IStudentDao;
-import in.ineuron.dto.Student;
 import in.ineuron.factory.StudentDaoFactory;
 import in.ineuron.factory.StudentServiceFactory;
+import in.ineuron.pojo.Student;
 
 public class StudentServiceImpl implements IStudentService
 {
