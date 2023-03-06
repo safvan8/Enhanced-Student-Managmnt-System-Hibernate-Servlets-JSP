@@ -1,6 +1,5 @@
 package in.ineuron.dao.dboperations;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -35,15 +34,8 @@ public class InsertStudent
 		System.out.println("InsertStudent.save()................\n");
 		int generatedSId = 0;
 
-		Configuration configuration = new Configuration();
-		configuration.configure();
-		
-		SessionFactory sessionFactory = configuration.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		
-		
-		
-		
+		Session session = HibernateUtil.getSession();
+
 		// creating session object by calling utility method
 //		Session session = HibernateUtil.getSession();
 

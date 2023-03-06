@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import in.ineuron.pojo.Student;
+import in.ineuron.util.HibernateUtil;
 
 public class SelectStudent
 {
@@ -35,13 +36,8 @@ public class SelectStudent
 	{
 		System.out.println("SelectStudent.findById()...................\n");
 
-		Configuration configuration = new Configuration();
-		configuration.configure();
-		
-		SessionFactory sessionFactory = configuration.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		
-		
+		Session session = HibernateUtil.getSession();
+
 		Student student = session.get(Student.class, sid);
 
 		return student;

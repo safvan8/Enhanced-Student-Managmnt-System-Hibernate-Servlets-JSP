@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import in.ineuron.pojo.Student;
+import in.ineuron.util.HibernateUtil;
 
 // to update existing student details
 public class UpdateStudent
@@ -36,11 +37,7 @@ public class UpdateStudent
 		System.out.println("UpdateStudent.updateById()......................");
 		String updateExecutionResult = "";
 
-		Configuration configuration = new Configuration();
-		configuration.configure();
-
-		SessionFactory sessionFactory = configuration.buildSessionFactory();
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSession();
 
 		Transaction transaction = null;
 

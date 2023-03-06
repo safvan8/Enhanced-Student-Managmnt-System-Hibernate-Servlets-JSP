@@ -13,6 +13,6 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hbmddl2.auto">update</property>
-		<mapping class="in.ineuron.dto.Student" />
+		<mapping class="in.ineuron.pojo.Student" />
 	</session-factory>
 </hibernate-configuration>

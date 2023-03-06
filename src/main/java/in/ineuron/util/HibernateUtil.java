@@ -7,37 +7,47 @@ import org.hibernate.cfg.Configuration;
 
 import java.io.File;
 
-public class HibernateUtil {
+public class HibernateUtil
+{
 
-	static Configuration cfg = null;
+	static Configuration configuration = null;
 	static SessionFactory sessionFactory = null;
 	static Session session = null;
-	static {
-		try {
-			cfg = new Configuration();
-			cfg.configure("resources/hibernate.cfg.xml");
-			sessionFactory = cfg.buildSessionFactory();
-		} catch (HibernateException e) {
+	static
+	{
+		try
+		{
+			Configuration configuration = new Configuration();
+			configuration.configure("/in/ineuron/resources/hibernate.cfg.xml");
+			sessionFactory = configuration.buildSessionFactory();
+		} catch (HibernateException e)
+		{
 			e.printStackTrace();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public static Session getSession() {
+	public static Session getSession()
+	{
 		if (session == null)
 			session = sessionFactory.openSession();
 		return session;
 	}
 
-	public static void closeSession(Session session) {
-		if (session != null) {
+	public static void closeSession(Session session)
+	{
+		if (session != null)
+		{
 			session.close();
 		}
 	}
 
-	public static void closeSessionFactory() {
-		if (sessionFactory != null) {
+	public static void closeSessionFactory()
+	{
+		if (sessionFactory != null)
+		{
 			sessionFactory.close();
 		}
 	}
