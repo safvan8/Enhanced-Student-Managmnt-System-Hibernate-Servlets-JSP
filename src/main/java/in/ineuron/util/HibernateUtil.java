@@ -5,51 +5,37 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.io.File;
-
 public class HibernateUtil
 {
 
-	static Configuration configuration = null;
-	static SessionFactory sessionFactory = null;
-	static Session session = null;
+	private static SessionFactory sessionFactory;
+
+	// Static block to initialize the session factory
 	static
 	{
 		try
 		{
-			Configuration configuration = new Configuration();
-			configuration.configure("/in/ineuron/resources/hibernate.cfg.xml");
+			// Load the configuration from hibernate.cfg.xml file
+			Configuration configuration = new Configuration().configure("/in/ineuron/resources/hibernate.cfg.xml");
+			// Build the session factory
 			sessionFactory = configuration.buildSessionFactory();
-		} catch (HibernateException e)
+		} catch (Throwable ex)
 		{
-			e.printStackTrace();
-		} catch (Exception e)
-		{
-			e.printStackTrace();
+			// If an exception occurs during initialization, throw an error
+			throw new ExceptionInInitializerError(ex);
 		}
 	}
 
-	public static Session getSession()
+	// Method to get the session factory instance
+	public static SessionFactory getSessionFactory()
 	{
-		if (session == null)
-			session = sessionFactory.openSession();
-		return session;
+		return sessionFactory;
 	}
 
-	public static void closeSession(Session session)
+	// Method to get a new session instance
+	public static Session getSession() throws HibernateException
 	{
-		if (session != null)
-		{
-			session.close();
-		}
-	}
-
-	public static void closeSessionFactory()
-	{
-		if (sessionFactory != null)
-		{
-			sessionFactory.close();
-		}
+		return sessionFactory.openSession();
 	}
 
 }

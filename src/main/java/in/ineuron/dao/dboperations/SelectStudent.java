@@ -34,11 +34,12 @@ public class SelectStudent
 
 	public Student findById(Integer sid)
 	{
-		System.out.println("SelectStudent.findById()...................\n");
-
-		Session session = HibernateUtil.getSession();
+		// getting session from utility class
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		Student student = session.get(Student.class, sid);
+
+		session.close();
 
 		return student;
 	}

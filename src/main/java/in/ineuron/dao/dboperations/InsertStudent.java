@@ -1,9 +1,7 @@
 package in.ineuron.dao.dboperations;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import in.ineuron.pojo.Student;
 import in.ineuron.util.HibernateUtil;
@@ -21,10 +19,8 @@ public class InsertStudent
 	public static InsertStudent getInsertStudent()
 	{
 		System.out.println("InsertStudent.getInsertStudent()...........\n");
-
 		if (insertStudent == null)
 			insertStudent = new InsertStudent();
-
 		return insertStudent;
 	}
 
@@ -32,16 +28,14 @@ public class InsertStudent
 	public Integer save(Student student)
 	{
 		System.out.println("InsertStudent.save()................\n");
-		int generatedSId = 0;
-
-		Session session = HibernateUtil.getSession();
-
-		// creating session object by calling utility method
-//		Session session = HibernateUtil.getSession();
+		
+		// getting session from utility class
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
 
 		boolean isOperationSuceess = false;
-		// getting transaction -> to setAutocommit(flase)
-		Transaction transaction = null;
+		int generatedSId = 0;
+
 		try
 		{
 			transaction = session.beginTransaction();
