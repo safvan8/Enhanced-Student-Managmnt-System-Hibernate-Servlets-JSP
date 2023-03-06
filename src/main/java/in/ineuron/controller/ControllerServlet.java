@@ -28,8 +28,7 @@ public class ControllerServlet extends HttpServlet
 
 	public ControllerServlet()
 	{
-		System.out.println("Servlet instantation..787"
-				+ "..");
+		System.out.println("Servlet instantation..787" + "..");
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class ControllerServlet extends HttpServlet
 		System.out.println("Servlet instantiation.");
 		try
 		{
-			getClass().forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
@@ -103,7 +102,7 @@ public class ControllerServlet extends HttpServlet
 				rd = request.getRequestDispatcher("../success.html");
 				rd.forward(request, response);
 
-			} else if (generatedSId ==0)
+			} else if (generatedSId == 0)
 			{
 				rd = request.getRequestDispatcher("../notfound.html");
 				rd.forward(request, response);
@@ -247,6 +246,53 @@ public class ControllerServlet extends HttpServlet
 				requestDispatcher.forward(request, response);
 				System.out.println("student record update Failed.........");
 			}
+		}
+
+		// to perform add operation [INSERT] :
+		if (uri.endsWith("deleteform"))
+		{
+			System.out.println("Delete existing Student details............");
+
+			// getting id enterd by user
+			Integer sid = Integer.parseInt(request.getParameter("sid"));
+
+			studentService = StudentServiceFactory.getStudentService();
+
+			// checking whether student is existing or not
+			Student existingStduent = studentService.findById(sid);
+
+			String deleteStatus = null;
+		
+			// checking whether the record existing in db or not
+			if (existingStduent != null)
+			{
+				System.out.println("record found");
+				deleteStatus = studentService.deleteById(existingStduent);
+
+			} else
+			{
+				System.out.println("no record found");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("../notfound.html");
+				requestDispatcher.forward(request, response);
+			}
+
+			// if record was available - displying the delete opertaion status to used
+			if (deleteStatus != null)
+			{
+				if ("success".equals(deleteStatus))
+				{
+					System.out.println("Student record updated.........");
+					RequestDispatcher requestDispatcher = request.getRequestDispatcher("../success.html");
+					requestDispatcher.forward(request, response);
+				} else
+				{
+					RequestDispatcher requestDispatcher = request.getRequestDispatcher("../failed.html");
+					requestDispatcher.forward(request, response);
+					System.out.println("student record update Failed.........");
+				}
+
+			}
+
 		}
 
 		// logout mechanism

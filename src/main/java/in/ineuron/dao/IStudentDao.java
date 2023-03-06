@@ -10,5 +10,5 @@ public interface IStudentDao
 
 	public abstract String updateById(Student student); // Update existing students details
 
-	public abstract String deleteById(Integer sid); // delete existing student details
+	public abstract String deleteById(Student student); // delete existing student details
 }

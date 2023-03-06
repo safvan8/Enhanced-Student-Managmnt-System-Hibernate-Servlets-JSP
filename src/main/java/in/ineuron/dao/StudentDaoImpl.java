@@ -1,9 +1,11 @@
 package in.ineuron.dao;
 
+import in.ineuron.dao.dboperations.DeleteStudent;
 import in.ineuron.dao.dboperations.InsertStudent;
 import in.ineuron.dao.dboperations.SelectStudent;
 import in.ineuron.dao.dboperations.UpdateStudent;
 import in.ineuron.pojo.Student;
+import net.bytebuddy.asm.Advice.Return;
 
 public class StudentDaoImpl implements IStudentDao
 {
@@ -13,15 +15,14 @@ public class StudentDaoImpl implements IStudentDao
 
 	// Object to select existing student details
 	private SelectStudent selectStudent;
-	
-	
+
 	@Override
 	public Integer save(Student student)
 	{
 		System.out.println("StudentDaoImpl.save().............\n");
-		
+
 		insertStudent = InsertStudent.getInsertStudent();
-		
+
 		return insertStudent.save(student);
 	}
 
@@ -37,17 +38,20 @@ public class StudentDaoImpl implements IStudentDao
 	public String updateById(Student student)
 	{
 		System.out.println("StudentDaoImpl.updateById()................/n");
-		
+
 		// passing to UpdateStudent module
 		UpdateStudent updateStudent = UpdateStudent.getUpdateStudent();
 		return updateStudent.updateById(student);
 	}
 
 	@Override
-	public String deleteById(Integer sid)
+	public String deleteById(Student student)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("StudentDaoImpl.deleteById()..................../n");
+		
+	//passing to delete Student module 
+		DeleteStudent deleteStudent = DeleteStudent.getDeleteStudent();
+		return deleteStudent.deleteById(student);
 	}
 
 }
