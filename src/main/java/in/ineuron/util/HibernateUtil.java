@@ -10,8 +10,8 @@ public class HibernateUtil
 
 	private static SessionFactory sessionFactory;
 
-	// Static block to initialize the session factory
-	static
+	// method to initialize the session factory
+	public static void activateHibernateEnvironment()
 	{
 		try
 		{

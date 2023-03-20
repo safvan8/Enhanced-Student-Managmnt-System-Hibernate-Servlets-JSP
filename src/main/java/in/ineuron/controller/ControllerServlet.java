@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import in.ineuron.factory.StudentServiceFactory;
 import in.ineuron.pojo.Student;
 import in.ineuron.service.IStudentService;
+import in.ineuron.util.HibernateUtil;
 
 //@WebServlet(urlPatterns = "/controller/*", loadOnStartup = 1)
 public class ControllerServlet extends HttpServlet
@@ -43,6 +44,9 @@ public class ControllerServlet extends HttpServlet
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//initializing Hibernate Environment
+		HibernateUtil.activateHibernateEnvironment();
 	}
 
 	@Override
