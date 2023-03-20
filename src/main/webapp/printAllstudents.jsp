@@ -7,18 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
-			<tr>
-				<th>SID</th>
-				<th>Name</th>
-				<th>Age</th>
-			</tr>
+	<table align="center">
+		<tr style="font-size: 43; font-weight: bold;"green" bordercolor="red" border="2">
+			<th width="50">SID</th>
+			<th width="100">Name</th>
+			<th width="50">Age</th>
+		</tr>
 		<tbody>
 			<c:forEach items="${studentList}" var="student">
-				<tr>
-					<td>${student.sid}</td>
-					<td>${student.sname}</td>
-					<td>${student.sage}</td>
+				<tr style="font-size: 43" bgcolor="lightyellow">
+					<td width="50">${student.sid}</td>
+					<td width="100">${student.sname}</td>
+					<td width="50">${student.sage}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
