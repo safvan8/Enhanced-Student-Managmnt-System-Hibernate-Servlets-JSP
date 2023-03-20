@@ -306,15 +306,15 @@ public class ControllerServlet extends HttpServlet
 			System.out.println("view all students details.....\n");
 
 			studentService = StudentServiceFactory.getStudentService();
-			
+
 			// all student details ecisting in DB
 			List<Student> allStudentDetails = studentService.viewAllStudentsDetils();
-			
+
 			System.out.println("all existing student details collected in controller.........");
-			
+
 			// add students to the list
 			request.setAttribute("studentList", allStudentDetails);
-			
+
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("../printAllstudents.jsp");
 			requestDispatcher.forward(request, response);
 
