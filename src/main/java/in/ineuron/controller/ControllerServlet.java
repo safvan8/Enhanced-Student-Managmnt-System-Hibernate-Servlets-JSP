@@ -2,6 +2,7 @@ package in.ineuron.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,8 +45,8 @@ public class ControllerServlet extends HttpServlet
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//initializing Hibernate Environment
+
+		// initializing Hibernate Environment
 		HibernateUtil.activateHibernateEnvironment();
 	}
 
@@ -252,7 +253,7 @@ public class ControllerServlet extends HttpServlet
 			}
 		}
 
-		// to perform add operation [INSERT] :
+		// to perform add operation [DELETE] :
 		if (uri.endsWith("deleteform"))
 		{
 			System.out.println("Delete existing Student details............");
@@ -266,7 +267,7 @@ public class ControllerServlet extends HttpServlet
 			Student existingStduent = studentService.findById(sid);
 
 			String deleteStatus = null;
-		
+
 			// checking whether the record existing in db or not
 			if (existingStduent != null)
 			{
@@ -296,6 +297,26 @@ public class ControllerServlet extends HttpServlet
 				}
 
 			}
+
+		}
+
+		// to view all students info
+		if (uri.endsWith("viewAllStudentsDetails"))
+		{
+			System.out.println("view all students details.....\n");
+
+			studentService = StudentServiceFactory.getStudentService();
+			
+			// all student details ecisting in DB
+			List<Student> allStudentDetails = studentService.viewAllStudentsDetils();
+			
+			System.out.println("all existing student details collected in controller.........");
+			
+			// add students to the list
+			request.setAttribute("studentList", allStudentDetails);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("../printAllstudents.jsp");
+			requestDispatcher.forward(request, response);
 
 		}
 

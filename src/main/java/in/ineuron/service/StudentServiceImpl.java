@@ -1,5 +1,7 @@
 package in.ineuron.service;
 
+import java.util.List;
+
 import in.ineuron.dao.IStudentDao;
 import in.ineuron.factory.StudentDaoFactory;
 import in.ineuron.factory.StudentServiceFactory;
@@ -51,6 +53,15 @@ public class StudentServiceImpl implements IStudentService
 		// passing to dao layer
 		studentDao = StudentDaoFactory.getStudentDao();
 		return studentDao.deleteById(student);
+	}
+
+	@Override
+	public List<Student> viewAllStudentsDetils()
+	{
+		System.out.println("StudentServiceImpl.viewAllStudentsDetils().........\n");
+		// passing to dao layer
+		studentDao = StudentDaoFactory.getStudentDao();
+		return studentDao.viewAllStudentsDetils();
 	}
 
 }
