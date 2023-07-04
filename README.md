@@ -1,6 +1,6 @@
-# Student Management Application
+# Student Management System
 
-This is a web-based student management application created using Servlet technology and used JSP and JSTL for the view layer. The application is designed to manage student data and provide basic CRUD (Create, Read, Update, Delete) functionality. The application uses a layered approach and implements the Factory and Singleton design patterns.
+This is a web-based student management System created using Servlet technology and used JSP and JSTL for the view layer. The application is designed to manage student data and provide basic CRUD (Create, Read, Update, Delete) functionality. The application uses a layered approach and implements the Factory and Singleton design patterns.
 
 ## Technologies Used
 
